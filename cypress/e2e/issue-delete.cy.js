@@ -20,12 +20,14 @@ function IssueVisibility(issueTitle, trueOrFalse) {
     cy.contains(issueTitle).should("not.exist");
   }
 }
+// Variables
+const issueTitle = "This is an issue of type: Task.";
 
 describe("Issue deletion", () => {
   beforeEach(() => {
     cy.visit("/project/board").then(() => {
       cy.url().should("eq", `${Cypress.env("baseUrl")}project/board`);
-      cy.contains("This is an issue of type: Task.").click();
+      cy.contains(issueTitle).click();
       cy.get('[data-testid="modal:issue-details"]').should("be.visible");
       cy.get('[placeholder="Short summary"]').should(
         "have.text",
@@ -56,6 +58,6 @@ describe("Issue deletion", () => {
     clickButtonInConfirm(".sc-bwzfXH.ewzfNn.sc-kGXeez.bLOzZQ", "Cancel");
     cy.get('[data-testid="modal:confirm"]').should("not.exist");
     cy.get(".sc-bdVaJa.fuyACr").click();
-    IssueVisibility("This is an issue of type: Task.", true);
+    IssueVisibility(issueTitle, true);
   });
 });
