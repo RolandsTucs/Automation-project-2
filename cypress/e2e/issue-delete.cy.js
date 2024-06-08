@@ -1,3 +1,5 @@
+import IssueModal from "../pages/IssueModal";
+
 // Functions
 function assertConfirmation(title, message) {
   cy.get('[data-testid="modal:confirm"]')
