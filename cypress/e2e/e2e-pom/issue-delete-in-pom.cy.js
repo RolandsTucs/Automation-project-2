@@ -14,17 +14,6 @@ describe("Issue delete", () => {
       });
   });
 
-  function IssueVisibility(issuesList, trueOrFalse) {
-    cy.get(issuesList).should("be.visible");
-    cy.reload();
-
-    if (true) {
-      cy.contains(issuesList).should("be.visible");
-    } else {
-      cy.contains(issuesList).should("not.exist");
-    }
-  }
-
   //issue title, that we are testing with, saved into variable
   const issueTitle = "This is an issue of type: Task.";
 
@@ -32,7 +21,7 @@ describe("Issue delete", () => {
   it("Should delete issue successfully", () => {
     IssueModal.clickDeleteButton;
     IssueModal.confirmDeletion;
-    IssueModal.ensureIssueIsNotVisibleOnBoard;
+    // IssueModal.ensureIssueIsNotVisibleOnBoard(issueTitle);
   });
 
   // Assignment 4 Test case 2: Cancellation of Issue Deletion
@@ -41,6 +30,6 @@ describe("Issue delete", () => {
     IssueModal.clickDeleteButton;
     IssueModal.cancelDeletion;
     IssueModal.closeDetailModal;
-    IssueModal.ensureIssueIsVisibleOnBoard;
+    IssueModal.ensureIssueIsVisibleOnBoard(issueTitle);
   });
 });
