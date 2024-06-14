@@ -1,5 +1,3 @@
-// issueTimeTracking.js
-
 class IssueTimeTracking {
   constructor() {
     this.issueDetails = '[data-testid="modal:issue-details"]';
