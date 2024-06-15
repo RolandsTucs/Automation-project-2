@@ -15,18 +15,18 @@ describe("Issue - time tracking functionality - adding, editing and deleting", (
     // ADD ESTIMATION
     cy.get(issueTimeTracking.issueDetails).within(() => {
       cy.get(issueTimeTracking.numberField).click().clear();
-      cy.get(issueTimeTracking.stopWatchIcon).click();
+      issueTimeTracking.openTimeTracking();
     });
     cy.get(issueTimeTracking.modalTracking).within(() => {
       // Clear existing time estimates and assert initial state
       cy.get(issueTimeTracking.placeHolderNumber).first().clear();
       cy.contains("No time logged");
     });
-    cy.get(issueTimeTracking.modalTracking).contains("Done").click();
+    issueTimeTracking.clickDoneInModalTracking();
     cy.get(issueTimeTracking.issueDetails).within(() => {
       cy.contains("No time logged");
       cy.get(issueTimeTracking.numberField).click().type("10");
-      cy.get(issueTimeTracking.closeIcon).first().click();
+      issueTimeTracking.closeIssueDetailsModal();
     });
     cy.get(issueTimeTracking.backlogList)
       .contains("This is an issue of type: Task.")
@@ -37,7 +37,7 @@ describe("Issue - time tracking functionality - adding, editing and deleting", (
 
     // UPDATE ESTIMATION
     cy.get(issueTimeTracking.numberField).click().type("20");
-    cy.get(issueTimeTracking.closeIcon).first().click();
+    issueTimeTracking.closeIssueDetailsModal();
     cy.get(issueTimeTracking.backlogList)
       .contains("This is an issue of type: Task.")
       .click();
@@ -49,7 +49,7 @@ describe("Issue - time tracking functionality - adding, editing and deleting", (
 
     // REMOVE ESTIMATION
     cy.get(issueTimeTracking.numberField).clear();
-    cy.get(issueTimeTracking.closeIcon).first().click();
+    issueTimeTracking.closeIssueDetailsModal();
     cy.get(issueTimeTracking.backlogList)
       .contains("This is an issue of type: Task.")
       .click();
@@ -69,7 +69,7 @@ describe("Issue - time tracking functionality - adding, editing and deleting", (
         cy.get(issueTimeTracking.placeHolderNumber).eq(0).clear().type("2");
         cy.get(issueTimeTracking.placeHolderNumber).eq(1).clear().type("5");
       });
-    cy.get(issueTimeTracking.modalTracking).contains("Done").click();
+    issueTimeTracking.clickDoneInModalTracking();
     cy.get(issueTimeTracking.issueDetails).within(() => {
       cy.contains("2h logged");
       cy.should("not.contain", "No time logged");

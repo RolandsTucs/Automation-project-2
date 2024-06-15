@@ -8,6 +8,18 @@ class IssueTimeTracking {
     this.closeIcon = '[data-testid="icon:close"]';
     this.backlogList = '[data-testid="board-list:backlog"]';
   }
+
+  openTimeTracking() {
+    cy.get(this.stopWatchIcon).click();
+  }
+
+  clickDoneInModalTracking() {
+    cy.get(issueTimeTracking.modalTracking).contains("Done").click();
+  }
+
+  closeIssueDetailsModal() {
+    cy.get(issueTimeTracking.closeIcon).first().click();
+  }
 }
 
 const issueTimeTracking = new IssueTimeTracking();
